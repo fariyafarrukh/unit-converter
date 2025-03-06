@@ -1,5 +1,37 @@
+
 import streamlit as st
 
+# 💡 Adding some style
+st.markdown(
+    """
+    <style>
+        .stButton>button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# 🚀 Title with Emoji
+st.title("🔢 Unit Converter ")
+
+st.markdown("### 📏 Convert between different units easily! 🔄")
+
+# 🎯 UI Elements
+value = st.number_input("🔢 Enter the value:", min_value=1.0, step=1.0)
+
+# 📝 Convert From (New Line)
+unit_from = st.selectbox("📤 Convert from:", ["meters", "kilometers", "grams", "kilograms"])
+
+# ⬇️ Convert To (New Line)
+unit_to = st.selectbox("📥 Convert to:", ["meters", "kilometers", "grams", "kilograms"])
+
+# Conversion Function
 def convert_units(value, unit_from, unit_to):
     conversions = {
         "meters_kilometers": 0.001,
@@ -12,20 +44,11 @@ def convert_units(value, unit_from, unit_to):
     if key in conversions:
         return value * conversions[key]
     else:
-        return "Conversion not supported"
+        return "❌ Conversion not supported!"
 
-# UI Elements should be outside of the function
-st.title("Unit Converter")
-
-value = st.number_input("Enter the value:" , min_value = 1.0, step=1.0)
-
-unit_from = st.selectbox("Convert from:", ["meters", "kilometers", "grams", "kilograms"])
-
-unit_to = st.selectbox("Convert to:", ["meters", "kilometers", "grams", "kilograms"])
-
-if st.button("Convert"):
+# 💡 Convert Button with Styling
+if st.button("🔄 Convert Now"):
     result = convert_units(value, unit_from, unit_to)
-    st.write(f"Converted value: {result}")
+    st.success(f"✅ **Converted Value:** {result}")
 
-     
      
